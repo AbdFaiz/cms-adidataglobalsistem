@@ -14,7 +14,6 @@
     {{-- Font Awesome CDN (latest) --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
-
     {{-- Favicon --}}
     <link rel="apple-touch-icon" href="{{ asset('assets/img/illustrations/3dlogowotxt.webp') }}" sizes="180x180">
     <link rel="icon" href="{{ asset('assets/img/illustrations/3dlogowotxt.webp') }}" sizes="32x32"
