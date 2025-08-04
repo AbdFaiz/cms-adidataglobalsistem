@@ -24,5 +24,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('signedUrl', function ($expression) {
             return "<?php echo URL::signedRoute($expression); ?>";
         });
+
+        if (env('APP_ENV') !== 'local') {
+            URL::forceScheme('https');
+        }
     }
 }
