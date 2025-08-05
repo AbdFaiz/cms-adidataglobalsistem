@@ -37,11 +37,19 @@ Route::post('/password/change', [PasswordController::class, 'changePassword'])->
 
 Auth::routes();
 Route::middleware(['auth', 'must_reset_password', 'active'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('signed')->name('dashboard');
-    Route::get('/profile', [DashboardController::class, 'profile'])->middleware('signed')->name('profile');
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])
+    // ->middleware('signed')
+    ->name('dashboard');
+    Route::get('/profile', [DashboardController::class, 'profile'])
+    // ->middleware('signed')
+    ->name('profile');
     Route::put('/profile/update', [DashboardController::class, 'updateProfile'])->name('profile.update');
-    Route::get('/transactions', [DashboardController::class, 'transactions'])->middleware('signed')->name('transactions');
-    Route::get('/map', [DashboardController::class, 'map'])->middleware('signed')->name('map');
+    Route::get('/transactions', [DashboardController::class, 'transactions'])
+    // ->middleware('signed')
+    ->name('transactions');
+    Route::get('/map', [DashboardController::class, 'map'])
+    // ->middleware('signed')
+    ->name('map');
 
     // Role management
     Route::resource('roles', 'App\Http\Controllers\RoleController');
@@ -51,16 +59,22 @@ Route::middleware(['auth', 'must_reset_password', 'active'])->group(function () 
     Route::resource('tasks', 'App\Http\Controllers\TaskController')->except((['show', 'edit', 'create']));
     Route::post('/tasks/{task}/status', [TaskController::class, 'updateStatus'])->name('tasks.status');
     // Event management
-    Route::get('/calendar', [EventController::class, 'index'])->middleware('signed')->name('calendar');
+    Route::get('/calendar', [EventController::class, 'index'])
+    // ->middleware('signed')
+    ->name('calendar');
     Route::resource('events', EventController::class)->except(['index', 'show', 'edit', 'create']);
     Route::get('/events/fetch', [EventController::class, 'fetchEvents']);
 
     Route::prefix('emails')->group(function () {
-        Route::get('/', [EmailController::class, 'index'])->middleware('signed')->name('email.index');
+        Route::get('/', [EmailController::class, 'index'])
+        // ->middleware('signed')
+        ->name('email.index');
         // fetch
         // Route::post('/check-emails', [EmailController::class, 'fetchEmails'])->name('email.fetch');
         // compose
-        Route::get('/compose', [EmailController::class, 'compose'])->middleware('signed')->name('email.compose');
+        Route::get('/compose', [EmailController::class, 'compose'])
+        // ->middleware('signed')
+        ->name('email.compose');
         
         // Single email actions
         Route::post('/{id}/read', [EmailController::class, 'markAsRead'])->name('emails.mark-read');
