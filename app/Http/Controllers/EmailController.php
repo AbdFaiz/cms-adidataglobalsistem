@@ -343,13 +343,6 @@ class EmailController extends Controller
 
     public function webhookFromDovecot(Request $request)
     {
-        if (
-            $request->getUser() !== env('PUSH_USER') ||
-            $request->getPassword() !== env('PUSH_PASS')
-        ) {
-            abort(401, 'Unauthorized');
-        }
-
         $subject = $request->input('subject') ?? 'No Subject';
 
         $ticketNumber = preg_match('/(Ticket-[A-Za-z0-9]{6})\b/', $subject, $matches)
